@@ -6,10 +6,11 @@ export const MAX_ACTIVITY_EXP = 50;
 
 export const ACTIVITY_NAMES = [
   '산책',
-  '애교',
-  '화남',
-  '하품',
-  '쉬기',
+  '수면',
+  '게임',
+  '독서',
+  '영화',
+  '노래',
 ] as const;
 
 export type ActivityName = (typeof ACTIVITY_NAMES)[number];

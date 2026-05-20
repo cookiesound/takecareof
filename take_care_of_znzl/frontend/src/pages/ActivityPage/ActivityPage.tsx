@@ -6,7 +6,7 @@ import LoadingScreen from '@/components/LoadingScreen/LoadingScreen';
 import { useGameStore } from '@/store/gameStore';
 import { useAuthStore } from '@/store/authStore';
 import { ACTIVITY_GIF_DURATION_MS } from '@/constants/game';
-import { ASSETS } from '@/assets';
+import { ASSETS, getActivityBackground } from '@/assets';
 import { getApiErrorMessage } from '@/utils/apiError';
 import { showGameError } from '@/utils/gameModal';
 import './ActivityPage.scss';
@@ -46,10 +46,16 @@ export default function ActivityPage() {
   }
 
   const activity = lastActivity;
+  const activityBg = activity ? getActivityBackground(activity.activityName) : undefined;
 
   return (
-    <GameLayout>
-      <div className="activity-page">
+    <GameLayout className="activity-page-layout">
+      <div
+        className="activity-page"
+        style={
+          activityBg ? { backgroundImage: `url(${activityBg})` } : undefined
+        }
+      >
         {phase === 'playing' && activity && (
           <div className="activity-page__playing">
             <img
