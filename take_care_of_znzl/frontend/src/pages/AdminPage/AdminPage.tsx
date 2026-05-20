@@ -19,6 +19,7 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(true);
   const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>([]);
   const [deleting, setDeleting] = useState(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
   const loadUsers = useCallback(async () => {
     setLoading(true);
@@ -50,34 +51,32 @@ export default function AdminPage() {
     }
   };
 
+  const selectedUsers = users.filter((u) => selectedRowKeys.includes(u.id));
+  const selectedNicknames = selectedUsers.map((u) => u.nickname).join(', ');
+
   const handleDeleteSelected = () => {
-    if (selectedRowKeys.length === 0) return;
+    if (selectedRowKeys.length === 0) {
+      message.warning('삭제할 사용자를 선택해주세요.');
+      return;
+    }
+    setDeleteModalOpen(true);
+  };
 
-    const selectedUsers = users.filter((u) => selectedRowKeys.includes(u.id));
-    const nicknames = selectedUsers.map((u) => u.nickname).join(', ');
-
-    Modal.confirm({
-      title: '사용자 삭제',
-      content: `선택한 사용자(${nicknames})를 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.`,
-      okText: '삭제',
-      okType: 'danger',
-      cancelText: '취소',
-      onOk: async () => {
-        setDeleting(true);
-        try {
-          const { deletedCount } = await adminApi.deleteUsers(selectedRowKeys);
-          message.success(`${deletedCount}명 삭제되었습니다.`);
-          setSelectedRowKeys([]);
-          await loadUsers();
-        } catch (err) {
-          showGameError({
-            message: getApiErrorMessage(err, '사용자 삭제에 실패했습니다.'),
-          });
-        } finally {
-          setDeleting(false);
-        }
-      },
-    });
+  const handleConfirmDelete = async () => {
+    setDeleting(true);
+    try {
+      const { deletedCount } = await adminApi.deleteUsers(selectedRowKeys);
+      message.success(`${deletedCount}명 삭제되었습니다.`);
+      setSelectedRowKeys([]);
+      setDeleteModalOpen(false);
+      await loadUsers();
+    } catch (err) {
+      showGameError({
+        message: getApiErrorMessage(err, '사용자 삭제에 실패했습니다.'),
+      });
+    } finally {
+      setDeleting(false);
+    }
   };
 
   const handleLogout = async () => {
@@ -133,12 +132,7 @@ export default function AdminPage() {
       <header className="admin-page__header">
         <Title level={3}>관리자 페이지</Title>
         <div className="admin-page__actions">
-          <Button
-            danger
-            disabled={selectedRowKeys.length === 0}
-            loading={deleting}
-            onClick={handleDeleteSelected}
-          >
+          <Button danger loading={deleting} onClick={handleDeleteSelected}>
             선택 삭제 ({selectedRowKeys.length})
           </Button>
           <Button onClick={() => void handleLogout()}>로그아웃</Button>
@@ -150,12 +144,30 @@ export default function AdminPage() {
         dataSource={users}
         loading={loading}
         rowSelection={{
+          type: 'checkbox',
           selectedRowKeys,
-          onChange: (keys) => setSelectedRowKeys(keys as string[]),
+          onChange: (keys) => setSelectedRowKeys(keys.map(String)),
         }}
         pagination={{ pageSize: 20 }}
         scroll={{ x: 900 }}
       />
+      <Modal
+        title="사용자 삭제"
+        open={deleteModalOpen}
+        centered
+        okText="삭제"
+        cancelText="취소"
+        okType="danger"
+        confirmLoading={deleting}
+        onCancel={() => setDeleteModalOpen(false)}
+        onOk={() => handleConfirmDelete()}
+      >
+        <p>
+          선택한 사용자({selectedNicknames || '없음'})를 삭제하시겠습니까?
+          <br />
+          이 작업은 되돌릴 수 없습니다.
+        </p>
+      </Modal>
     </div>
   );
 }
