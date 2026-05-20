@@ -1,5 +1,6 @@
 import type { CharacterReaction } from '@/constants/game';
 import { ASSETS } from '@/assets';
+import SpeechBubble from '@/components/SpeechBubble/SpeechBubble';
 import './Character.scss';
 
 interface Props {
@@ -7,6 +8,7 @@ interface Props {
   positionX: number;
   walkDirection: 1 | -1;
   onClick: () => void;
+  speechText?: string | null;
 }
 
 export default function Character({
@@ -14,26 +16,30 @@ export default function Character({
   positionX,
   walkDirection,
   onClick,
+  speechText,
 }: Props) {
   return (
-    <button
-      type="button"
-      className={`character character--${reaction}`}
-      onClick={onClick}
-      aria-label="캐릭터와 상호작용"
+    <div
+      className="character-root"
+      style={{ transform: `translateX(${positionX}px) translateY(-24px)` }}
     >
-      <span
-        className="character__wrapper"
-        style={{ transform: `translateX(${positionX}px)` }}
+      {speechText ? <SpeechBubble text={speechText} /> : null}
+      <button
+        type="button"
+        className={`character character--${reaction}`}
+        onClick={onClick}
+        aria-label="캐릭터와 상호작용"
       >
-        <img
-          src={ASSETS.characterDefaultGif}
-          alt="깨비 캐릭터"
-          className="character__sprite"
-          style={{ transform: `scaleX(${walkDirection})` }}
-          draggable={false}
-        />
-      </span>
-    </button>
+        <span className="character__wrapper">
+          <img
+            src={ASSETS.characterDefaultGif}
+            alt="깨비 캐릭터"
+            className="character__sprite"
+            style={{ transform: `scaleX(${walkDirection})` }}
+            draggable={false}
+          />
+        </span>
+      </button>
+    </div>
   );
 }

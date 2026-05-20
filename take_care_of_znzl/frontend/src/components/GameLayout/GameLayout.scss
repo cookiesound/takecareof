@@ -16,4 +16,11 @@
     border-radius: 24px;
     overflow: hidden;
   }
+
+  &.auth-layout {
+    background-color: #1a1520;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
 }

@@ -1,17 +1,18 @@
 .speech-bubble {
   position: absolute;
-  top: 20%;
+  bottom: calc(100% + 6px);
   left: 50%;
   transform: translateX(-50%) scale(0.8);
   background: #fff;
-  border: 2px solid #ffb8d9;
+  border: 2px solid #3d5a80;
   border-radius: 16px;
   padding: 10px 16px;
-  max-width: 220px;
+  max-width: min(220px, 70vw);
+  width: max-content;
   opacity: 0;
   pointer-events: none;
-  z-index: 10;
-  box-shadow: 0 4px 12px rgba(255, 110, 180, 0.2);
+  z-index: 12;
+  box-shadow: 0 4px 12px rgba(30, 58, 95, 0.2);
 
   &--visible {
     opacity: 1;
@@ -22,7 +23,7 @@
   p {
     margin: 0;
     font-size: 14px;
-    color: #5a3d4f;
+    color: #1a1a1a;
     text-align: center;
     line-height: 1.4;
   }

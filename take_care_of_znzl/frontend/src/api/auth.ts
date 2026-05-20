@@ -4,8 +4,12 @@ import type { AuthResponse, PublicUser } from '@/types/user';
 export async function register(
   nickname: string,
   password: string
-): Promise<void> {
-  await apiClient.post('/auth/register', { nickname, password });
+): Promise<string> {
+  const { data } = await apiClient.post<{ message: string }>('/auth/register', {
+    nickname,
+    password,
+  });
+  return data.message;
 }
 
 export async function login(

@@ -1,6 +1,13 @@
-.character {
+.character-root {
   position: relative;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.character {
+  position: relative;
   background: none;
   border: none;
   cursor: pointer;
@@ -19,7 +26,7 @@
   &__sprite {
     display: block;
     width: auto;
-    height: clamp(140px, 38vw, 200px);
+    height: clamp(230px, 58vw, 310px);
     object-fit: contain;
     filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.25));
     user-select: none;
@@ -27,7 +34,6 @@
     transition: transform 0.15s ease;
   }
 
-  // 추후 행동별 GIF 추가 시 reaction modifier로 교체 예정
   &--walk .character__wrapper {
     transition: transform 0.08s linear;
   }

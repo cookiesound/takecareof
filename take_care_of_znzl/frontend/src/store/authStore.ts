@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import * as authApi from '@/api/auth';
 import { getToken, setToken, clearToken } from '@/utils/storage';
+import { closeAllModals } from '@/utils/closeAllModals';
 import type { PublicUser } from '@/types/user';
 
 interface AuthState {
@@ -48,6 +49,7 @@ export const useAuthStore = create<AuthState>((set) => ({
       await authApi.logout();
     } finally {
       clearToken();
+      closeAllModals();
       set({ user: null, isAuthenticated: false });
     }
   },

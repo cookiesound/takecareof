@@ -25,4 +25,5 @@ export const CLICK_QUOTES = [
   '심심해...',
 ] as const;
 
-export const CHZZK_URL = 'https://chzzk.naver.com';
+export const CHZZK_URL =
+  'https://chzzk.naver.com/f8f9c0d0029b58c79eb6070ff501cac1';

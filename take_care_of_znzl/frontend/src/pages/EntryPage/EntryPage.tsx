@@ -40,27 +40,23 @@ export default function EntryPage() {
       className="entry-page"
       style={{ backgroundImage: `url(${ASSETS.enterBg})` }}
     >
-      <h1 className="entry-page__title">
-        <span className="entry-page__emoji" aria-hidden>
-          👺🔥
-        </span>
-        깨비를 돌봐줘
-      </h1>
-      <GameButton
-        gameVariant="confirm"
-        size="large"
-        className="entry-page__login-btn"
-        onClick={() => navigate('/login')}
-      >
-        로그인
-      </GameButton>
-      <GameButton
-        gameVariant="cancel"
-        className="entry-page__register-btn"
-        onClick={() => navigate('/register')}
-      >
-        회원가입
-      </GameButton>
+      <div className="entry-page__actions">
+        <GameButton
+          gameVariant="confirm"
+          size="large"
+          className="entry-page__login-btn"
+          onClick={() => navigate('/login')}
+        >
+          로그인
+        </GameButton>
+        <GameButton
+          gameVariant="cancel"
+          className="entry-page__register-btn"
+          onClick={() => navigate('/register')}
+        >
+          회원가입
+        </GameButton>
+      </div>
     </div>
   );
 }

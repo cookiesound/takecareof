@@ -19,8 +19,8 @@ export default function StatusBar({ user }: Props) {
       <Progress
         percent={expPercent}
         showInfo={false}
-        strokeColor="#ff6eb4"
-        trailColor="#ffe0ef"
+        strokeColor="#1e3a5f"
+        trailColor="#d4dce8"
         size="small"
       />
       <p className="status-bar__exp">

@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { message } from 'antd';
-import axios from 'axios';
 import GameLayout from '@/components/GameLayout/GameLayout';
 import GameButton from '@/components/GameButton/GameButton';
 import LoadingScreen from '@/components/LoadingScreen/LoadingScreen';
@@ -9,6 +7,8 @@ import { useGameStore } from '@/store/gameStore';
 import { useAuthStore } from '@/store/authStore';
 import { ACTIVITY_GIF_DURATION_MS } from '@/constants/game';
 import { ASSETS } from '@/assets';
+import { getApiErrorMessage } from '@/utils/apiError';
+import { showGameError } from '@/utils/gameModal';
 import './ActivityPage.scss';
 
 export default function ActivityPage() {
@@ -26,12 +26,10 @@ export default function ActivityPage() {
         setUser(result.user);
         setTimeout(() => setPhase('result'), ACTIVITY_GIF_DURATION_MS);
       } catch (err) {
-        const msg =
-          axios.isAxiosError(err) && err.response?.data
-            ? String((err.response.data as { message?: string }).message)
-            : '활동에 실패했습니다.';
-        message.error(msg);
-        navigate('/main', { replace: true });
+        showGameError({
+          message: getApiErrorMessage(err, '활동에 실패했습니다.'),
+          onClose: () => navigate('/main', { replace: true }),
+        });
       } finally {
         setLoading(false);
       }

@@ -1,11 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { message } from 'antd';
-import axios from 'axios';
 import GameLayout from '@/components/GameLayout/GameLayout';
 import StatusBar from '@/components/StatusBar/StatusBar';
 import Character from '@/components/Character/Character';
-import SpeechBubble from '@/components/SpeechBubble/SpeechBubble';
 import BottomMenu from '@/components/BottomMenu/BottomMenu';
 import SettingModal from '@/components/SettingModal/SettingModal';
 import HelpModal from '@/components/HelpModal/HelpModal';
@@ -14,7 +11,8 @@ import { useGameStore } from '@/store/gameStore';
 import { useAuthStore } from '@/store/authStore';
 import { useUiStore } from '@/store/uiStore';
 import { useCharacterReaction } from '@/hooks/useCharacterReaction';
-import { showGameSuccess } from '@/utils/gameModal';
+import { showGameSuccess, showGameError } from '@/utils/gameModal';
+import { getApiErrorMessage } from '@/utils/apiError';
 import { ASSETS } from '@/assets';
 import './MainPage.scss';
 
@@ -33,8 +31,10 @@ export default function MainPage() {
       try {
         const gameUser = await fetchGameState();
         setAuthUser(gameUser);
-      } catch {
-        message.error('게임 데이터를 불러오지 못했습니다.');
+      } catch (err) {
+        showGameError({
+          message: getApiErrorMessage(err, '게임 데이터를 불러오지 못했습니다.'),
+        });
       } finally {
         setLoading(false);
       }
@@ -55,11 +55,9 @@ export default function MainPage() {
         content: '신청이 접수되었습니다. 레벨과 경험치가 초기화되었어요!',
       });
     } catch (err) {
-      const msg =
-        axios.isAxiosError(err) && err.response?.data
-          ? String((err.response.data as { message?: string }).message)
-          : '스티커 신청에 실패했습니다.';
-      message.error(msg);
+      showGameError({
+        message: getApiErrorMessage(err, '스티커 신청에 실패했습니다.'),
+      });
     }
   };
 
@@ -79,12 +77,12 @@ export default function MainPage() {
         className="main-page__scene"
         style={{ backgroundImage: `url(${ASSETS.mainBg})` }}
       >
-        {speechText && <SpeechBubble text={speechText} />}
         <Character
           reaction={reaction}
           positionX={positionX}
           walkDirection={walkDirection}
           onClick={handleClick}
+          speechText={speechText}
         />
       </main>
       <BottomMenu

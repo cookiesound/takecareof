@@ -24,9 +24,11 @@ export default function SettingModal({ open, user, onClose, onLogout }: Props) {
       onCancel={onClose}
       footer={null}
       centered
+      closable={false}
+      maskClosable
+      title={null}
       className="game-popup game-popup--medium setting-modal"
       style={popupStyle}
-      title="설정"
       width={320}
     >
       <div className="game-popup__content setting-modal__content">
@@ -39,7 +41,7 @@ export default function SettingModal({ open, user, onClose, onLogout }: Props) {
         >
           치지직 이동
         </GameButton>
-        <p className="game-popup__stat">
+        <p className="game-popup__stat setting-modal__stat">
           총 스티커 신청 횟수: <strong>{user.stickerRequestCount}</strong>
         </p>
         <div className="game-popup__actions">

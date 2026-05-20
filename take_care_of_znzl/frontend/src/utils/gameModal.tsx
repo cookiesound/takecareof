@@ -20,3 +20,9 @@ export function showGameSuccess({ title, content, onOk }: GameAlertOptions): voi
     onOk,
   });
 }
+
+export {
+  showGameError,
+  showGameMessageModal,
+  showGameSuccessModal,
+} from '@/store/gameErrorModalStore';

@@ -1,7 +1,7 @@
 .status-bar {
   padding: 12px 16px;
-  background: rgba(255, 255, 255, 0.9);
-  border-bottom: 2px solid #ffe0ef;
+  background: rgba(255, 255, 255, 0.92);
+  border-bottom: 2px solid #c8d4e8;
   backdrop-filter: blur(8px);
 
   &__row {
@@ -14,19 +14,19 @@
   &__nickname {
     font-weight: 700;
     font-size: 16px;
-    color: #5a3d4f;
+    color: #1e3a5f;
   }
 
   &__level {
     font-weight: 700;
-    color: #ff6eb4;
+    color: #1e3a5f;
     font-size: 14px;
   }
 
   &__exp {
     margin: 4px 0 8px;
     font-size: 12px;
-    color: #8a6b7d;
+    color: #3d5a80;
     text-align: right;
   }
 
@@ -40,12 +40,12 @@
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    background: #ffe0ef;
+    background: #d4dce8;
     transition: background 0.2s;
 
     &--full {
-      background: #ff6eb4;
-      box-shadow: 0 0 6px rgba(255, 110, 180, 0.5);
+      background: #1e3a5f;
+      box-shadow: 0 0 6px rgba(30, 58, 95, 0.45);
     }
   }
 }

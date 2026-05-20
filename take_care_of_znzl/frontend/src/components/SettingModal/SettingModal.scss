@@ -1,5 +1,21 @@
 .setting-modal {
+  &.game-popup .ant-modal-body {
+    padding-top: calc(12px + 20px) !important;
+  }
+
+  &.game-popup .ant-modal-header {
+    display: none !important;
+  }
+
   &__content {
-    padding-top: 4px;
+    padding-top: 0;
+  }
+
+  &__stat {
+    color: #000 !important;
+
+    strong {
+      color: #000 !important;
+    }
   }
 }

@@ -2,11 +2,12 @@ import { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Table, Button, message, Typography } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import axios from 'axios';
 import * as adminApi from '@/api/admin';
 import { useAuthStore } from '@/store/authStore';
 import type { AdminUserRow } from '@/types/user';
 import LoadingScreen from '@/components/LoadingScreen/LoadingScreen';
+import { getApiErrorMessage } from '@/utils/apiError';
+import { showGameError } from '@/utils/gameModal';
 import './AdminPage.scss';
 
 const { Title } = Typography;
@@ -22,8 +23,10 @@ export default function AdminPage() {
     try {
       const data = await adminApi.fetchAdminUsers();
       setUsers(data.filter((u) => u.nickname !== 'admin'));
-    } catch {
-      message.error('사용자 목록을 불러오지 못했습니다.');
+    } catch (err) {
+      showGameError({
+        message: getApiErrorMessage(err, '사용자 목록을 불러오지 못했습니다.'),
+      });
     } finally {
       setLoading(false);
     }
@@ -39,11 +42,9 @@ export default function AdminPage() {
       message.success('처리 완료되었습니다.');
       await loadUsers();
     } catch (err) {
-      const msg =
-        axios.isAxiosError(err) && err.response?.data
-          ? String((err.response.data as { message?: string }).message)
-          : '처리에 실패했습니다.';
-      message.error(msg);
+      showGameError({
+        message: getApiErrorMessage(err, '처리에 실패했습니다.'),
+      });
     }
   };
 

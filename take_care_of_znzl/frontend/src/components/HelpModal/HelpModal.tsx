@@ -21,9 +21,11 @@ export default function HelpModal({ open, onClose }: Props) {
       onCancel={onClose}
       footer={null}
       centered
+      closable={false}
+      maskClosable
+      title={null}
       className="game-popup game-popup--large help-modal"
       style={popupStyle}
-      title="도움말"
       width={360}
     >
       <div className="game-popup__content help-modal__content">

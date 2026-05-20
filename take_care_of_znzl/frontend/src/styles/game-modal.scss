@@ -44,6 +44,21 @@
     min-height: 340px;
   }
 
+  &--small .ant-modal-content {
+    background: var(--popup-bg) no-repeat center / 100% 100% !important;
+    min-height: 260px;
+  }
+
+  &__message {
+    margin: 0;
+    color: #f4e9d8;
+    line-height: 1.55;
+    font-size: 15px;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+    word-break: keep-all;
+  }
+
   &__content {
     color: #f4e9d8;
 
@@ -85,6 +100,103 @@
 
     strong {
       color: #fff;
+    }
+  }
+}
+
+.game-error-modal {
+  /* pop_s 비율에 맞춰 본문 영역 확보 */
+  .ant-modal-content {
+    min-height: 320px !important;
+  }
+
+  .ant-modal-header {
+    position: absolute;
+    top: 6px;
+    inset-inline-end: 8px;
+    z-index: 10;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    background: transparent !important;
+    height: auto;
+  }
+
+  .ant-modal-title {
+    display: none !important;
+  }
+
+  .ant-modal-close {
+    top: 6px !important;
+    inset-inline-end: 8px !important;
+    color: #f4e9d8 !important;
+    width: 32px;
+    height: 32px;
+
+    &:hover {
+      color: #fff !important;
+      background: rgba(0, 0, 0, 0.25) !important;
+    }
+  }
+
+  .ant-modal-body {
+    padding: 0 32px 36px !important;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 288px;
+    /* 두올(스크롤) 영역 시각적 중앙보다 살짝 아래 */
+    margin-top: 54%;
+    padding-bottom: 8px;
+  }
+
+  &__message {
+    margin: 0;
+    color: #000 !important;
+    line-height: 1.55;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+    text-shadow: none !important;
+    word-break: keep-all;
+  }
+}
+
+.game-error-popup {
+  .ant-modal-confirm-title {
+    color: #f4e9d8 !important;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  }
+
+  .ant-modal-confirm-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ant-modal-confirm-content {
+    width: 100%;
+    margin-top: 8px !important;
+  }
+
+  .ant-modal-confirm-btns {
+    margin-top: 20px;
+    text-align: center;
+
+    .ant-btn {
+      min-width: 120px;
     }
   }
 }
