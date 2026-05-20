@@ -11,6 +11,11 @@ import { getApiErrorMessage } from '@/utils/apiError';
 import { showGameError } from '@/utils/gameModal';
 import './ActivityPage.scss';
 
+function getActivityPlayingLabel(activityName: string): string {
+  if (activityName === '영화') return '영화 보는 중...';
+  return `${activityName} 중...`;
+}
+
 export default function ActivityPage() {
   const navigate = useNavigate();
   const performActivity = useGameStore((s) => s.performActivity);
@@ -58,7 +63,9 @@ export default function ActivityPage() {
       >
         {phase === 'playing' && activity && (
           <div className="activity-page__playing">
-            <p className="activity-page__name">{activity.activityName} 중...</p>
+            <p className="activity-page__name">
+              {getActivityPlayingLabel(activity.activityName)}
+            </p>
           </div>
         )}
         {phase === 'result' && activity && (
