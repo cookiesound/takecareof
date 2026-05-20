@@ -4,8 +4,8 @@ import { createClient } from '@supabase/supabase-js';
 
 dotenv.config();
 
-const ADMIN_NICKNAME = 'admin';
-const ADMIN_PASSWORD = '1234';
+const ADMIN_NICKNAME = 'djemals';
+const ADMIN_PASSWORD = '123123';
 
 async function seedAdmin(): Promise<void> {
   const url = process.env.SUPABASE_URL;
@@ -35,7 +35,7 @@ async function seedAdmin(): Promise<void> {
       console.error('Failed to update admin:', error.message);
       process.exit(1);
     }
-    console.log('Admin account updated (nickname: admin, password: 1234)');
+    console.log(`Admin account updated (nickname: ${ADMIN_NICKNAME}, password: ${ADMIN_PASSWORD})`);
     return;
   }
 
@@ -57,7 +57,7 @@ async function seedAdmin(): Promise<void> {
     process.exit(1);
   }
 
-  console.log('Admin account created (nickname: admin, password: 1234)');
+  console.log(`Admin account created (nickname: ${ADMIN_NICKNAME}, password: ${ADMIN_PASSWORD})`);
 }
 
 seedAdmin();

@@ -34,7 +34,7 @@ cd backend
 cp .env.example .env
 # .env 파일에 Supabase, JWT_SECRET 등 입력
 npm install
-npm run seed:admin   # 관리자 계정 생성 (admin / 1234)
+npm run seed:admin   # 관리자 계정 생성 (djemals / 123123)
 npm run dev
 ```
 
@@ -108,8 +108,8 @@ CLIENT_URL=https://your-vercel-domain.vercel.app
 ## 관리자 계정
 
 ```txt
-닉네임: admin
-비밀번호: 1234
+닉네임: djemals
+비밀번호: 123123
 ```
 
 `npm run seed:admin`으로 생성/갱신합니다.

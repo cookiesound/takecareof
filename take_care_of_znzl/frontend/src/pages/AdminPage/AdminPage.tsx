@@ -22,7 +22,7 @@ export default function AdminPage() {
     setLoading(true);
     try {
       const data = await adminApi.fetchAdminUsers();
-      setUsers(data.filter((u) => u.nickname !== 'admin'));
+      setUsers(data.filter((u) => u.nickname !== 'djemals'));
     } catch (err) {
       showGameError({
         message: getApiErrorMessage(err, '사용자 목록을 불러오지 못했습니다.'),
