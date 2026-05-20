@@ -65,6 +65,8 @@ SUPABASE_SERVICE_ROLE_KEY=
 JWT_SECRET=
 TOKEN_EXPIRE_DAYS=7
 CLIENT_URL=https://your-vercel-domain.vercel.app
+# 여러 origin은 쉼표로 구분 (로컬 + Vercel 동시 사용)
+# CLIENT_URL=https://your-vercel-domain.vercel.app,http://localhost:5173
 ```
 
 > `service_role_key`는 **backend에서만** 사용합니다. frontend에 넣지 마세요.

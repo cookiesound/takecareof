@@ -11,7 +11,18 @@ const app = express();
 
 app.use(
   cors({
-    origin: env.clientUrl,
+    origin: (origin, callback) => {
+      // Origin 없음: 동일 출처·curl·헬스체크 등
+      if (!origin) {
+        callback(null, true);
+        return;
+      }
+      if (env.clientUrls.includes(origin)) {
+        callback(null, true);
+        return;
+      }
+      callback(null, false);
+    },
     credentials: true,
   })
 );
