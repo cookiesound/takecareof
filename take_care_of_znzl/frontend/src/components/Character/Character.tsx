@@ -1,5 +1,5 @@
 import type { CharacterReaction } from '@/constants/game';
-import { ASSETS } from '@/assets';
+import { getCharacterReactionGif } from '@/assets';
 import SpeechBubble from '@/components/SpeechBubble/SpeechBubble';
 import './Character.scss';
 
@@ -32,7 +32,7 @@ export default function Character({
       >
         <span className="character__wrapper">
           <img
-            src={ASSETS.characterDefaultGif}
+            src={getCharacterReactionGif(reaction)}
             alt="깨비 캐릭터"
             className="character__sprite"
             style={{ transform: `scaleX(${walkDirection})` }}
