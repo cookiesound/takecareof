@@ -5,6 +5,7 @@ export const ACTIVITY_GIF_DURATION_MS = 3000;
 export const CHARACTER_REACTION_INTERVAL_MS = 5000;
 export const SPEECH_BUBBLE_DURATION_MS = 2500;
 
+/** 추후 행동별 GIF 연동 예정 — 현재는 기본.gif만 사용 */
 export const CHARACTER_REACTIONS = [
   'idle',
   'walk',

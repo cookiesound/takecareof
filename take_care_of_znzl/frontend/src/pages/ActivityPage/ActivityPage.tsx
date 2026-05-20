@@ -3,19 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 import axios from 'axios';
 import GameLayout from '@/components/GameLayout/GameLayout';
+import GameButton from '@/components/GameButton/GameButton';
 import LoadingScreen from '@/components/LoadingScreen/LoadingScreen';
 import { useGameStore } from '@/store/gameStore';
 import { useAuthStore } from '@/store/authStore';
 import { ACTIVITY_GIF_DURATION_MS } from '@/constants/game';
+import { ASSETS } from '@/assets';
 import './ActivityPage.scss';
-
-const ACTIVITY_EMOJI: Record<string, string> = {
-  산책: '🚶',
-  애교: '💕',
-  화남: '💢',
-  하품: '😴',
-  쉬기: '🛋️',
-};
 
 export default function ActivityPage() {
   const navigate = useNavigate();
@@ -60,9 +54,12 @@ export default function ActivityPage() {
       <div className="activity-page">
         {phase === 'playing' && activity && (
           <div className="activity-page__playing">
-            <span className="activity-page__emoji">
-              {ACTIVITY_EMOJI[activity.activityName] ?? '🎮'}
-            </span>
+            <img
+              src={ASSETS.characterDefaultGif}
+              alt=""
+              className="activity-page__character"
+              draggable={false}
+            />
             <p className="activity-page__name">{activity.activityName} 중...</p>
           </div>
         )}
@@ -77,9 +74,9 @@ export default function ActivityPage() {
             {activity.leveledUp && (
               <p className="activity-page__levelup">🎉 레벨업! Lv.{activity.user.level}</p>
             )}
-            <button type="button" className="activity-page__btn" onClick={handleReturn}>
+            <GameButton gameVariant="confirm" className="activity-page__btn" onClick={handleReturn}>
               메인으로
-            </button>
+            </GameButton>
           </div>
         )}
       </div>

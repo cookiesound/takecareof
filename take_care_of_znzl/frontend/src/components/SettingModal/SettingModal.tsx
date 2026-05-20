@@ -1,6 +1,9 @@
-import { Modal, Button } from 'antd';
+import { Modal } from 'antd';
+import type { CSSProperties } from 'react';
 import { CHZZK_URL } from '@/constants/game';
 import type { PublicUser } from '@/types/user';
+import GameButton from '@/components/GameButton/GameButton';
+import { ASSETS } from '@/assets';
 import './SettingModal.scss';
 
 interface Props {
@@ -11,31 +14,42 @@ interface Props {
 }
 
 export default function SettingModal({ open, user, onClose, onLogout }: Props) {
+  const popupStyle = {
+    '--popup-bg': `url(${ASSETS.popM})`,
+  } as CSSProperties;
+
   return (
     <Modal
       open={open}
       onCancel={onClose}
       footer={null}
       centered
-      className="setting-modal"
+      className="game-popup game-popup--medium setting-modal"
+      style={popupStyle}
       title="설정"
+      width={320}
     >
-      <div className="setting-modal__content">
-        <Button
-          type="primary"
+      <div className="game-popup__content setting-modal__content">
+        <GameButton
+          gameVariant="confirm"
           block
           href={CHZZK_URL}
           target="_blank"
           rel="noopener noreferrer"
         >
           치지직 이동
-        </Button>
-        <p className="setting-modal__stat">
+        </GameButton>
+        <p className="game-popup__stat">
           총 스티커 신청 횟수: <strong>{user.stickerRequestCount}</strong>
         </p>
-        <Button danger block onClick={onLogout}>
-          로그아웃
-        </Button>
+        <div className="game-popup__actions">
+          <GameButton gameVariant="cancel" block onClick={onLogout}>
+            로그아웃
+          </GameButton>
+          <GameButton gameVariant="confirm" block onClick={onClose}>
+            닫기
+          </GameButton>
+        </div>
       </div>
     </Modal>
   );

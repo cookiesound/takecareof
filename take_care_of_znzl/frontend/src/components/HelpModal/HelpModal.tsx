@@ -1,5 +1,8 @@
 import { Modal } from 'antd';
+import type { CSSProperties } from 'react';
 import { MAX_DAILY_ENERGY, MAX_EXP_PER_LEVEL, STICKER_UNLOCK_LEVEL } from '@/constants/game';
+import GameButton from '@/components/GameButton/GameButton';
+import { ASSETS } from '@/assets';
 import './HelpModal.scss';
 
 interface Props {
@@ -8,16 +11,22 @@ interface Props {
 }
 
 export default function HelpModal({ open, onClose }: Props) {
+  const popupStyle = {
+    '--popup-bg': `url(${ASSETS.popL})`,
+  } as CSSProperties;
+
   return (
     <Modal
       open={open}
       onCancel={onClose}
       footer={null}
       centered
-      className="help-modal"
+      className="game-popup game-popup--large help-modal"
+      style={popupStyle}
       title="도움말"
+      width={360}
     >
-      <div className="help-modal__content">
+      <div className="game-popup__content help-modal__content">
         <section>
           <h4>활동</h4>
           <p>
@@ -39,6 +48,11 @@ export default function HelpModal({ open, onClose }: Props) {
             레벨과 경험치가 초기화됩니다.
           </p>
         </section>
+        <div className="game-popup__actions">
+          <GameButton gameVariant="confirm" block onClick={onClose}>
+            확인
+          </GameButton>
+        </div>
       </div>
     </Modal>
   );

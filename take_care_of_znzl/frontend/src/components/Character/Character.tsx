@@ -1,4 +1,5 @@
 import type { CharacterReaction } from '@/constants/game';
+import { ASSETS } from '@/assets';
 import './Character.scss';
 
 interface Props {
@@ -7,14 +8,6 @@ interface Props {
   walkDirection: 1 | -1;
   onClick: () => void;
 }
-
-const REACTION_LABELS: Record<CharacterReaction, string> = {
-  idle: '🐰',
-  walk: '🐰💨',
-  cute: '🐰💕',
-  angry: '🐰💢',
-  yawn: '🐰😴',
-};
 
 export default function Character({
   reaction,
@@ -30,12 +23,16 @@ export default function Character({
       aria-label="캐릭터와 상호작용"
     >
       <span
-        className="character__sprite"
-        style={{
-          transform: `translateX(${positionX}px) scaleX(${walkDirection})`,
-        }}
+        className="character__wrapper"
+        style={{ transform: `translateX(${positionX}px)` }}
       >
-        {REACTION_LABELS[reaction]}
+        <img
+          src={ASSETS.characterDefaultGif}
+          alt="깨비 캐릭터"
+          className="character__sprite"
+          style={{ transform: `scaleX(${walkDirection})` }}
+          draggable={false}
+        />
       </span>
     </button>
   );

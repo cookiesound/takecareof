@@ -1,27 +1,5 @@
 .help-modal {
-  .ant-modal-content {
-    border-radius: 16px;
-  }
-
   &__content {
-    section {
-      margin-bottom: 16px;
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-
-    h4 {
-      margin: 0 0 6px;
-      color: #ff6eb4;
-    }
-
-    p {
-      margin: 0;
-      color: #5a3d4f;
-      line-height: 1.5;
-      font-size: 14px;
-    }
+    padding-top: 4px;
   }
 }

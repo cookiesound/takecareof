@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { message, Modal } from 'antd';
+import { message } from 'antd';
 import axios from 'axios';
 import GameLayout from '@/components/GameLayout/GameLayout';
 import StatusBar from '@/components/StatusBar/StatusBar';
@@ -14,6 +14,8 @@ import { useGameStore } from '@/store/gameStore';
 import { useAuthStore } from '@/store/authStore';
 import { useUiStore } from '@/store/uiStore';
 import { useCharacterReaction } from '@/hooks/useCharacterReaction';
+import { showGameSuccess } from '@/utils/gameModal';
+import { ASSETS } from '@/assets';
 import './MainPage.scss';
 
 export default function MainPage() {
@@ -38,7 +40,7 @@ export default function MainPage() {
       }
     };
     void load();
-  }, [fetchGameState]);
+  }, [fetchGameState, setAuthUser]);
 
   const handleActivity = () => {
     navigate('/activity');
@@ -48,10 +50,9 @@ export default function MainPage() {
     try {
       const updated = await requestSticker();
       setAuthUser(updated);
-      Modal.success({
+      showGameSuccess({
         title: '스티커 신청 완료',
         content: '신청이 접수되었습니다. 레벨과 경험치가 초기화되었어요!',
-        centered: true,
       });
     } catch (err) {
       const msg =
@@ -72,10 +73,12 @@ export default function MainPage() {
   }
 
   return (
-    <GameLayout>
+    <GameLayout className="main-page">
       <StatusBar user={user} />
-      <main className="main-page__scene">
-        <div className="main-page__background" />
+      <main
+        className="main-page__scene"
+        style={{ backgroundImage: `url(${ASSETS.mainBg})` }}
+      >
         {speechText && <SpeechBubble text={speechText} />}
         <Character
           reaction={reaction}

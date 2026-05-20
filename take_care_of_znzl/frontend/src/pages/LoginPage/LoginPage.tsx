@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Form, Input, Button, message } from 'antd';
+import { Form, Input, message } from 'antd';
 import axios from 'axios';
 import { useAuthStore } from '@/store/authStore';
 import GameLayout from '@/components/GameLayout/GameLayout';
+import GameButton from '@/components/GameButton/GameButton';
 import './LoginPage.scss';
 
 interface LoginForm {
@@ -53,9 +54,9 @@ export default function LoginPage() {
             <Input.Password placeholder="비밀번호" size="large" />
           </Form.Item>
           <Form.Item>
-            <Button type="primary" htmlType="submit" block size="large" loading={loading}>
+            <GameButton gameVariant="confirm" htmlType="submit" block size="large" loading={loading}>
               로그인
-            </Button>
+            </GameButton>
           </Form.Item>
         </Form>
         <p className="login-page__link">

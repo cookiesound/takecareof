@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button } from 'antd';
 import { useAuthStore } from '@/store/authStore';
 import { useServerWake } from '@/hooks/useServerWake';
 import LoadingScreen from '@/components/LoadingScreen/LoadingScreen';
+import GameButton from '@/components/GameButton/GameButton';
 import { getToken } from '@/utils/storage';
+import { ASSETS } from '@/assets';
 import './EntryPage.scss';
 
 export default function EntryPage() {
@@ -35,24 +36,31 @@ export default function EntryPage() {
   }
 
   return (
-    <div className="entry-page">
-      <div className="entry-page__logo">🐰</div>
-      <h1 className="entry-page__title">즈니를 돌봐줘</h1>
-      <Button
-        type="primary"
+    <div
+      className="entry-page"
+      style={{ backgroundImage: `url(${ASSETS.enterBg})` }}
+    >
+      <h1 className="entry-page__title">
+        <span className="entry-page__emoji" aria-hidden>
+          👺🔥
+        </span>
+        깨비를 돌봐줘
+      </h1>
+      <GameButton
+        gameVariant="confirm"
         size="large"
         className="entry-page__login-btn"
         onClick={() => navigate('/login')}
       >
         로그인
-      </Button>
-      <button
-        type="button"
-        className="entry-page__register-link"
+      </GameButton>
+      <GameButton
+        gameVariant="cancel"
+        className="entry-page__register-btn"
         onClick={() => navigate('/register')}
       >
         회원가입
-      </button>
+      </GameButton>
     </div>
   );
 }
