@@ -6,7 +6,7 @@ import LoadingScreen from '@/components/LoadingScreen/LoadingScreen';
 import { useGameStore } from '@/store/gameStore';
 import { useAuthStore } from '@/store/authStore';
 import { ACTIVITY_GIF_DURATION_MS } from '@/constants/game';
-import { ASSETS, getActivityBackground } from '@/assets';
+import { getActivityBackground } from '@/assets';
 import { getApiErrorMessage } from '@/utils/apiError';
 import { showGameError } from '@/utils/gameModal';
 import './ActivityPage.scss';
@@ -58,12 +58,6 @@ export default function ActivityPage() {
       >
         {phase === 'playing' && activity && (
           <div className="activity-page__playing">
-            <img
-              src={ASSETS.characterDefaultGif}
-              alt=""
-              className="activity-page__character"
-              draggable={false}
-            />
             <p className="activity-page__name">{activity.activityName} 중...</p>
           </div>
         )}
