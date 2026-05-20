@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Table, Button, message, Typography } from 'antd';
+import { Table, Button, message, Typography, Modal } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import * as adminApi from '@/api/admin';
 import { useAuthStore } from '@/store/authStore';
@@ -17,6 +17,8 @@ export default function AdminPage() {
   const logout = useAuthStore((s) => s.logout);
   const [users, setUsers] = useState<AdminUserRow[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>([]);
+  const [deleting, setDeleting] = useState(false);
 
   const loadUsers = useCallback(async () => {
     setLoading(true);
@@ -46,6 +48,36 @@ export default function AdminPage() {
         message: getApiErrorMessage(err, '처리에 실패했습니다.'),
       });
     }
+  };
+
+  const handleDeleteSelected = () => {
+    if (selectedRowKeys.length === 0) return;
+
+    const selectedUsers = users.filter((u) => selectedRowKeys.includes(u.id));
+    const nicknames = selectedUsers.map((u) => u.nickname).join(', ');
+
+    Modal.confirm({
+      title: '사용자 삭제',
+      content: `선택한 사용자(${nicknames})를 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.`,
+      okText: '삭제',
+      okType: 'danger',
+      cancelText: '취소',
+      onOk: async () => {
+        setDeleting(true);
+        try {
+          const { deletedCount } = await adminApi.deleteUsers(selectedRowKeys);
+          message.success(`${deletedCount}명 삭제되었습니다.`);
+          setSelectedRowKeys([]);
+          await loadUsers();
+        } catch (err) {
+          showGameError({
+            message: getApiErrorMessage(err, '사용자 삭제에 실패했습니다.'),
+          });
+        } finally {
+          setDeleting(false);
+        }
+      },
+    });
   };
 
   const handleLogout = async () => {
@@ -100,13 +132,27 @@ export default function AdminPage() {
     <div className="admin-page">
       <header className="admin-page__header">
         <Title level={3}>관리자 페이지</Title>
-        <Button onClick={() => void handleLogout()}>로그아웃</Button>
+        <div className="admin-page__actions">
+          <Button
+            danger
+            disabled={selectedRowKeys.length === 0}
+            loading={deleting}
+            onClick={handleDeleteSelected}
+          >
+            선택 삭제 ({selectedRowKeys.length})
+          </Button>
+          <Button onClick={() => void handleLogout()}>로그아웃</Button>
+        </div>
       </header>
       <Table
         rowKey="id"
         columns={columns}
         dataSource={users}
         loading={loading}
+        rowSelection={{
+          selectedRowKeys,
+          onChange: (keys) => setSelectedRowKeys(keys as string[]),
+        }}
         pagination={{ pageSize: 20 }}
         scroll={{ x: 900 }}
       />

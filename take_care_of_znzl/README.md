@@ -104,6 +104,7 @@ CLIENT_URL=https://your-vercel-domain.vercel.app
 | POST | /game/sticker-request | 스티커 신청 |
 | GET | /admin/users | 유저 목록 (admin) |
 | POST | /admin/sticker-complete | 스티커 처리 (admin) |
+| POST | /admin/users/delete | 사용자 삭제 (admin, body: userIds) |
 
 ## 관리자 계정
 

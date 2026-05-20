@@ -34,3 +34,27 @@ export async function completeSticker(
     next(err);
   }
 }
+
+export async function deleteUsers(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  try {
+    const { userIds } = req.body as { userIds?: string[] };
+    if (!Array.isArray(userIds) || userIds.length === 0) {
+      res.status(400).json({ message: 'userIds가 필요합니다.' });
+      return;
+    }
+    const { deletedCount } = await adminService.deleteUsers(
+      userIds,
+      req.user!.userId
+    );
+    res.json({
+      deletedCount,
+      message: `${deletedCount}명의 사용자가 삭제되었습니다.`,
+    });
+  } catch (err) {
+    next(err);
+  }
+}

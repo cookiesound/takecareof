@@ -13,3 +13,11 @@ export async function completeSticker(userId: string): Promise<AdminUserRow> {
   );
   return data.user;
 }
+
+export async function deleteUsers(userIds: string[]): Promise<{ deletedCount: number }> {
+  const { data } = await apiClient.post<{ deletedCount: number }>(
+    '/admin/users/delete',
+    { userIds }
+  );
+  return data;
+}

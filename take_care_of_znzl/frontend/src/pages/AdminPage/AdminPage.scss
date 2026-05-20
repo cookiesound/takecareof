@@ -12,6 +12,12 @@
     margin-bottom: 24px;
   }
 
+  &__actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
   @media (max-width: 768px) {
     padding: 16px;
   }

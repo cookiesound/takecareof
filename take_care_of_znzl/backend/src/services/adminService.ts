@@ -61,3 +61,50 @@ export async function completeStickerRequest(
 
   return toAdminUser(updated as UserRow);
 }
+
+export async function deleteUsers(
+  userIds: string[],
+  adminId: string
+): Promise<{ deletedCount: number }> {
+  let deletedCount = 0;
+
+  for (const userId of userIds) {
+    if (userId === adminId) {
+      throw new AppError(400, '본인 계정은 삭제할 수 없습니다.');
+    }
+
+    const { data: user, error: fetchError } = await supabase
+      .from('users')
+      .select('id, role')
+      .eq('id', userId)
+      .maybeSingle();
+
+    if (fetchError) {
+      throw new AppError(500, '사용자 조회에 실패했습니다.');
+    }
+
+    if (!user) {
+      continue;
+    }
+
+    const row = user as Pick<UserRow, 'id' | 'role'>;
+    if (row.role === 'admin') {
+      throw new AppError(400, '관리자 계정은 삭제할 수 없습니다.');
+    }
+
+    await supabase
+      .from('sticker_request_logs')
+      .update({ completed_by: null })
+      .eq('completed_by', userId);
+
+    const { error: deleteError } = await supabase.from('users').delete().eq('id', userId);
+
+    if (deleteError) {
+      throw new AppError(500, '사용자 삭제에 실패했습니다.');
+    }
+
+    deletedCount += 1;
+  }
+
+  return { deletedCount };
+}
