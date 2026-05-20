@@ -1,0 +1,18 @@
+.setting-modal {
+  .ant-modal-content {
+    border-radius: 16px;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 8px;
+  }
+
+  &__stat {
+    text-align: center;
+    margin: 0;
+    color: #5a3d4f;
+  }
+}

@@ -1,0 +1,50 @@
+.entry-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  padding: 24px;
+  background: linear-gradient(180deg, #ffe8f5 0%, #e8f4ff 100%);
+
+  &__logo {
+    font-size: 80px;
+    margin-bottom: 16px;
+    animation: logo-float 2s ease-in-out infinite;
+  }
+
+  &__title {
+    font-size: 28px;
+    color: #5a3d4f;
+    margin: 0 0 48px;
+    font-weight: 800;
+  }
+
+  &__login-btn {
+    width: min(280px, 90vw);
+    height: 48px !important;
+    border-radius: 24px !important;
+    font-weight: 700 !important;
+    margin-bottom: 24px;
+  }
+
+  &__register-link {
+    background: none;
+    border: none;
+    color: #8a6b7d;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 8px;
+  }
+}
+
+@keyframes logo-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}

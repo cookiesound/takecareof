@@ -1,0 +1,25 @@
+.user-detail-modal {
+  .user-detail-content {
+    .user-info {
+      margin-bottom: 20px;
+      padding: 16px;
+      background-color: #f8f9fa;
+      border-radius: 8px;
+
+      p {
+        margin: 8px 0;
+        font-size: 14px;
+
+        strong {
+          color: #1890ff;
+        }
+      }
+    }
+
+    .sticker-board-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+  }
+}

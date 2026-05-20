@@ -1,0 +1,19 @@
+.game-layout {
+  width: 100%;
+  max-width: 430px;
+  min-height: 100dvh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #b8e8ff 0%, #ffe8f5 60%, #fff5e8 100%);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+
+  @media (min-width: 768px) {
+    min-height: 90dvh;
+    margin-top: 5dvh;
+    border-radius: 24px;
+    overflow: hidden;
+  }
+}

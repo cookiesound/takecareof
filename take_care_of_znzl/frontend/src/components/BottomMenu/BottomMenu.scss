@@ -1,0 +1,41 @@
+.bottom-menu {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  padding: 12px 16px 20px;
+  background: rgba(255, 255, 255, 0.95);
+  border-top: 2px solid #ffe0ef;
+
+  &__btn {
+    padding: 12px 4px;
+    border: 2px solid #ffb8d9;
+    border-radius: 12px;
+    background: #fff;
+    color: #5a3d4f;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+      transform 0.15s ease,
+      background 0.15s ease,
+      box-shadow 0.15s ease;
+    touch-action: manipulation;
+
+    &:active:not(:disabled) {
+      transform: scale(0.94);
+      background: #fff0f7;
+    }
+
+    &--primary {
+      background: linear-gradient(180deg, #ff8ec8 0%, #ff6eb4 100%);
+      color: #fff;
+      border-color: #ff6eb4;
+    }
+
+    &--disabled,
+    &:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+  }
+}

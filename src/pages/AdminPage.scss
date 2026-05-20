@@ -1,0 +1,113 @@
+.admin-layout {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+  .admin-sider {
+    background: #001529;
+
+    .sider-header {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      border-bottom: 1px solid #303030;
+
+      h3 {
+        color: white;
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
+      }
+    }
+
+    .ant-menu {
+      border-right: none;
+    }
+  }
+
+  .admin-header {
+    background: white;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+
+    .trigger-button {
+      font-size: 18px;
+      margin-right: 16px;
+      color: #666;
+    }
+
+    .page-title {
+      margin: 0;
+      color: #2c3e50;
+      font-weight: 600;
+    }
+  }
+
+  .admin-content {
+    padding: 24px;
+    background: transparent;
+
+    .page-card {
+      max-width: 1200px;
+      margin: 0 auto;
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+
+      .admin-controls {
+        margin-bottom: 24px;
+        padding: 16px;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        border: 1px solid #e9ecef;
+
+        .ant-space {
+          width: 100%;
+          justify-content: flex-start;
+          align-items: center;
+        }
+      }
+
+      .loading-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 60px 0;
+
+        p {
+          margin-top: 16px;
+          color: #666;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+
+// 반응형 디자인
+@media (max-width: 768px) {
+  .admin-layout {
+    .admin-content {
+      padding: 16px;
+
+      .page-card {
+        .admin-controls {
+          .ant-space {
+            flex-direction: column;
+            align-items: stretch;
+
+            .ant-space-item {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}

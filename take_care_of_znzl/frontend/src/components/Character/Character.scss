@@ -1,0 +1,89 @@
+.character {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.1s ease;
+  touch-action: manipulation;
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &__sprite {
+    display: block;
+    font-size: 96px;
+    line-height: 1;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+    animation: character-bounce 2s ease-in-out infinite;
+  }
+
+  &--walk .character__sprite {
+    animation: character-walk 0.4s steps(2) infinite;
+  }
+
+  &--cute .character__sprite {
+    animation: character-cute 0.5s ease infinite alternate;
+  }
+
+  &--angry .character__sprite {
+    animation: character-shake 0.3s ease infinite;
+  }
+
+  &--yawn .character__sprite {
+    animation: character-yawn 1.5s ease infinite;
+  }
+}
+
+@keyframes character-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes character-walk {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes character-cute {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes character-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-3px);
+  }
+  75% {
+    transform: translateX(3px);
+  }
+}
+
+@keyframes character-yawn {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-5deg);
+  }
+}

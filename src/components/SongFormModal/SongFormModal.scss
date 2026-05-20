@@ -1,0 +1,73 @@
+.song-form-modal {
+  .ant-modal-content {
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .ant-modal-header {
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    padding: 20px 24px;
+
+    .ant-modal-title {
+      font-weight: 600;
+      color: #2c3e50;
+    }
+  }
+
+  .ant-modal-body {
+    padding: 24px;
+  }
+
+  .song-form {
+    .ant-form-item {
+      margin-bottom: 20px;
+
+      .ant-form-item-label {
+        label {
+          font-weight: 500;
+          color: #495057;
+        }
+      }
+
+      .ant-input,
+      .ant-select-selector {
+        border-radius: 8px;
+        border: 1px solid #ced4da;
+        transition: all 0.3s ease;
+
+        &:hover,
+        &:focus {
+          border-color: #667eea;
+          box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+        }
+      }
+
+      .ant-input-number {
+        width: 100%;
+      }
+    }
+  }
+
+  .ant-modal-footer {
+    border-top: 1px solid #e9ecef;
+    padding: 16px 24px;
+
+    .ant-btn {
+      border-radius: 8px;
+      font-weight: 500;
+      height: 36px;
+      padding: 0 16px;
+
+      &.ant-btn-primary {
+        background: #667eea;
+        border-color: #667eea;
+
+        &:hover {
+          background: #5a6fd8;
+          border-color: #5a6fd8;
+        }
+      }
+    }
+  }
+}
